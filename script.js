@@ -1,8 +1,10 @@
 // Write your JavaScript code here!
 
-
-
 window.addEventListener("load", function () {
+  let list = document.getElementById("faultyItems");
+  list.style.visibility = "hidden";
+  let form = document.querySelector("form");
+
   let listedPlanets;
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
   let listedPlanetsResponse = myFetch();
@@ -26,9 +28,6 @@ window.addEventListener("load", function () {
       );
     });
 
-  let list = document.getElementById("faultyItems");
-  list.style.visibility = "hidden";
-  let form = document.querySelector("form");
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     let pilotName = document.querySelector("input[name=pilotName]");
