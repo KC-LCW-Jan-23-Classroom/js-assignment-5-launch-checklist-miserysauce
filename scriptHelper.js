@@ -24,7 +24,7 @@ function addDestinationInfo(
 
 function validateInput(testInput) {
   let numberInput = Number(testInput);
-  if (numberInput == "") {
+  if (testInput === "") {
     return "Empty";
   } else if (isNaN(numberInput)) {
     return "Not a Number";
@@ -38,19 +38,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   let copilotStatus = document.getElementById("copilotStatus");
   let fuelStatus = document.getElementById("fuelStatus");
   let cargoStatus = document.getElementById("cargoStatus");
-  if (
-    validateInput(pilot) === "Empty" ||
-    validateInput(copilot) === "Empty" ||
-    validateInput(fuelLevel) === "Empty" ||
-    validateInput(cargoLevel) === "Empty"
-  ) {
+  if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
     alert("All fields are required!");
-  } else if (
-    validateInput(pilot) === "Is a Number" ||
-    validateInput(copilot) === "Is a number" ||
-    validateInput(fuelLevel) === "Not a number" ||
-    validateInput(cargoLevel) === "Not a number"
-  ) {
+} else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number" ) {
     alert("Make sure to enter valid information for each field!");
   } else {
     list.style.visibility = "visible";
