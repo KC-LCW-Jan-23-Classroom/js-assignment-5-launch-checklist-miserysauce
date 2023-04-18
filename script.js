@@ -1,25 +1,11 @@
 // Write your JavaScript code here!
 
+
+
 window.addEventListener("load", function () {
-  let form = document.querySelector("form");
-  form.addEventListener("submit", function (event) {
-    let pilotName = document.querySelector("input[name=pilotName]");
-    let copilotName = document.querySelector("input[name=copilotName]");
-    let fuelLevel = document.querySelector("input[name=fuelLevel]");
-    let cargoMass = document.querySelector("input[name=cargoMass]");
-    if (
-      pilotName.value === "" ||
-      copilotName.value === "" ||
-      fuelLevel.value === "" ||
-      cargoMass.value === ""
-    ) {
-      alert("All fields are required.");
-      event.preventDefault();
-    }
-  });
   let listedPlanets;
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-  let listedPlanetsResponse;
+  let listedPlanetsResponse = myFetch();
   listedPlanetsResponse
     .then(function (result) {
       listedPlanets = result;
@@ -28,5 +14,32 @@ window.addEventListener("load", function () {
     .then(function () {
       console.log(listedPlanets);
       // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+      let selectedPlanet = pickPlanet(listedPlanets);
+      addDestinationInfo(
+        document,
+        selectedPlanet.name,
+        selectedPlanet.diameter,
+        selectedPlanet.star,
+        selectedPlanet.distance,
+        selectedPlanet.moons,
+        selectedPlanet.image
+      );
     });
+
+  let list = document.getElementById("faultyItems");
+  list.style.visibility = "hidden";
+  let form = document.querySelector("form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let pilotName = document.querySelector("input[name=pilotName]");
+    let copilotName = document.querySelector("input[name=copilotName]");
+    let fuelInput = document.querySelector("input[name=fuelLevel]");
+    let cargoInput = document.querySelector("input[name=cargoMass]");
+    let pilot = pilotName.value;
+    let copilot = copilotName.value;
+    let fuelLevel = fuelInput.value;
+    let cargoLevel = cargoInput.value;
+
+    formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
+  });
 });
